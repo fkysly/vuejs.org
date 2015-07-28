@@ -130,7 +130,7 @@
                 </li>
             
                 <li>
-                    <a href="/guide/best-practices.html" class="sidebar-link new">Tips & Best Practices</a>
+                    <a href="/guide/best-practices.html" class="sidebar-link new">提示和最佳实践</a>
                 </li>
             
             <li><a href="http://legacy.vuejs.org">旧版 0.11 文档</a></li>
@@ -154,12 +154,13 @@
 <h2 id="示例">示例</h2><p>过滤器必须放置在一个指令的值的最后：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span> <span class="attribute">v-text</span>=<span class="value">"message | capitalize"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>你也可以用在 mustache 风格的绑定的内部：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span>&gt;</span>&amp;#123;&amp;#123;message | uppercase&amp;#125;&amp;#125;<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span>&gt;</span>&#123;&#123;message | uppercase&#125;&#125;<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>可以把多个过滤器链在一起：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span>&gt;</span>&amp;#123;&amp;#123;message | lowercase | reverse&amp;#125;&amp;#125;<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="参数">参数</h2><p>一些过滤器是可以附带参数的。只需用空格分隔开：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span>&gt;</span>&amp;#123;&amp;#123;order | pluralize st nd rd th&amp;#125;&amp;#125;<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-on</span>=<span class="value">"keyup: submitForm | key enter"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span>&gt;</span>&#123;&#123;message | lowercase | reverse&#125;&#125;<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="参数">参数</h2><p>一些过滤器是可以附带参数的。参数用空格分隔开：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">span</span>&gt;</span>&#123;&#123;order | pluralize 'st' 'nd' 'rd' 'th'&#125;&#125;<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-on</span>=<span class="value">"keyup: submitForm | key 'enter'"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>原始的字符串参数需要用单引号围住。无引号的参数在当前数据范围内，会被认定是动态的。以后在说到自定义过滤器时，我们会仔细讨论这个问题的细节。</p>
 <p>上述示例的具体用法参见<a href="../api/filters.html">完整的内建过滤器列表</a>。</p>
 <p>现在你已经了解了指令和过滤器，接下来我们趁热打铁<a href="../guide/list.html">展示一个列表</a>吧。</p>
 

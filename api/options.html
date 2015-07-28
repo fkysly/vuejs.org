@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>选项 - vue.js</title>
+        <title>组件选项 - vue.js</title>
         <meta charset="utf-8">
         <meta name="description" content="Vue.js - Intuitive, Fast and Composable MVVM for building interactive interfaces.">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -74,7 +74,7 @@
                 </li>
             
                 <li>
-                    <a href="/api/options.html" class="sidebar-link current">选项</a>
+                    <a href="/api/options.html" class="sidebar-link current">组件选项</a>
                 </li>
             
                 <li>
@@ -109,7 +109,7 @@
 
 
 <div class="content api with-sidebar">
-    <h1>选项</h1>
+    <h1>组件选项</h1>
     <div id="ad">
         <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
     </div>
@@ -138,16 +138,22 @@
 <p>Computed的属性是被mixed到Vue实例. 所有getters和setters的<code>this</code>就是Vue实例本身.</p>
 <p><strong>例子：</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  data: &#123; a: <span class="number">1</span> &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    <span class="comment">// get only, just need a function</span></span><br><span class="line">    aDouble: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.a * <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// both get and set</span></span><br><span class="line">    aPlus: &#123;</span><br><span class="line">      get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span></span><br><span class="line">      &#125;,</span><br><span class="line">      set: <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.a = v - <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">vm.aPlus   <span class="comment">// -&gt; 2</span></span><br><span class="line">vm.aPlus = <span class="number">3</span></span><br><span class="line">vm.a       <span class="comment">// -&gt; 2</span></span><br><span class="line">vm.aDouble <span class="comment">// -&gt; 4</span></span><br></pre></td></tr></table></figure>
-<h3 id="paramAttributes">paramAttributes</h3><ul>
+<h3 id="props">props</h3><ul>
 <li><strong>类型：</strong> <code>Array</code></li>
 </ul>
-<p>paramAttributes是一个数组。每个成员会被创建在Vue实例作为初始数据. 一般用来传递数据到一个组件.</p>
+<p>一个数组。每个成员会被创建在Vue实例作为初始数据. 一般用来传递数据到一个组件.</p>
 <p><strong>例子：</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'param-demo'</span>, &#123;</span><br><span class="line">  paramAttributes: [<span class="string">'size'</span>, <span class="string">'message'</span>],</span><br><span class="line">  compiled: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.size)    <span class="comment">// -&gt; 100</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.message) <span class="comment">// -&gt; 'hello!'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'param-demo'</span>, &#123;</span><br><span class="line">  props: [<span class="string">'size'</span>, <span class="string">'message'</span>],</span><br><span class="line">  compiled: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.size)    <span class="comment">// -&gt; 100</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.message) <span class="comment">// -&gt; 'hello!'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">param-demo</span> <span class="attribute">size</span>=<span class="value">"100"</span> <span class="attribute">message</span>=<span class="value">"hello!"</span>&gt;</span><span class="tag">&lt;/<span class="title">param-demo</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>参数属性也可以包含interpolation标签。Interpolation标签将以父组件为实例来解析，这实际是由<a href="../api/directives.html#v-with"><code>v-with</code></a>完成的，也就是意味着如果interpolation表达式的值改变了，组件相关联的属性也会被更新：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">param-demo</span> <span class="attribute">message</span>=<span class="value">"&#123;&amp;#123;parentMessage&amp;#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="title">param-demo</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="-_属性注意事项"><code>-</code> 属性注意事项</h4><p>HTML属性名是不区分大小写的，所以我们用<code>-</code>而不是camel case。使用带<code>-</code>的<code>paramAttributes</code>，这里有一些特殊情况：</p>
+<p>传递数据的更多细节如下：</p>
+<ul>
+<li><a href="../guide/components.html#Prop_Binding_Types">属性绑定类型</a></li>
+<li><a href="../guide/components.html#Passing_Callbacks_as_Props">传递回调给属性</a></li>
+</ul>
+<p>除了通过字符串的方式定义属性，你也可以使用对象来包含验证方面的需求：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'prop-validation-demo'</span>, &#123;</span><br><span class="line">  props: [</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'size'</span>,</span><br><span class="line">      type: <span class="built_in">Number</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name: <span class="string">'message'</span>,</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      required: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>有关属性验证的更多细节请移步至<a href="/guide/components.html#Prop_Validation">属性验证</a>。</p>
+<h4 id="-_属性注意事项"><code>-</code> 属性注意事项</h4><p>HTML属性名是不区分大小写的，所以我们用<code>-</code>而不是camel case。使用带<code>-</code>的<code>props</code>，这里有一些特殊情况：</p>
 <ol>
 <li><p>如果属性是一个数据属性，<code>data-</code>前缀会自动去掉；</p>
 </li>
@@ -214,6 +220,10 @@
 <li><strong>类型：</strong> <code>Object</code></li>
 </ul>
 <p>一个指令的哈希表。参看<a href="../guide/custom-directive.html">Writing Custom Directives</a>.</p>
+<h3 id="elementDirectives">elementDirectives</h3><ul>
+<li><strong>类型：</strong> <code>Object</code></li>
+</ul>
+<p>一个元素级指令的哈希表。参看<a href="/guide/custom-directive.html#Element_Directives">Element Directives</a>。</p>
 <h3 id="filters">filters</h3><ul>
 <li><strong>类型：</strong> <code>Object</code></li>
 </ul>
@@ -222,10 +232,6 @@
 <li><strong>类型：</strong> <code>Object</code></li>
 </ul>
 <p>一个组件的哈希表。参看<a href="../guide/components.html">Component System</a>.</p>
-<h3 id="partials">partials</h3><ul>
-<li><strong>类型：</strong> <code>Object</code></li>
-</ul>
-<p>一个partial的哈希表。参看<a href="../api/directives.html#v-partial">v-partial</a>。</p>
 <h3 id="transitions">transitions</h3><ul>
 <li><strong>类型：</strong> <code>Object</code></li>
 </ul>
@@ -264,6 +270,7 @@
 <p>当在console里监视一个扩展过的Vue组件的时候，缺省构造函数名是<code>VueComponent</code>，但它并不是很有用。但你可以传一个可选项<code>name</code>到<code>Vue.extend()</code>，这样你就能知道你正在看哪个组件。这个字符串或被camelized并作为组件的构造函数的名字使用。</p>
 <p><strong>例子：</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Ctor = Vue.extend(&#123;</span><br><span class="line">  name: <span class="string">'cool-stuff'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Ctor()</span><br><span class="line"><span class="built_in">console</span>.log(vm) <span class="comment">// -&gt; CoolStuff &#123;$el: null, ...&#125;</span></span><br></pre></td></tr></table></figure>
+
     <div class="footer">发现了问题或想要贡献？来 Github 给 Vue.js <a href="https://github.com/vuejs/vuejs.org" target="_blank">英文站点</a>或<a href="https://github.com/Jinjiang/vuejs.org/tree/lang-zh" target="_blank">中文翻译</a>来个 Fork 吧！</div>
 </div>
                 

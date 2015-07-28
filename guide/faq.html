@@ -130,7 +130,7 @@
                 </li>
             
                 <li>
-                    <a href="/guide/best-practices.html" class="sidebar-link new">Tips & Best Practices</a>
+                    <a href="/guide/best-practices.html" class="sidebar-link new">提示和最佳实践</a>
                 </li>
             
             <li><a href="http://legacy.vuejs.org">旧版 0.11 文档</a></li>
@@ -160,13 +160,13 @@
 </li>
 <li><p>你不能定义数据对象的getter/setters。这不会是问题，因为数据对象都期望从纯JSON中取得，而且vue.js提供该提取属性。</p>
 </li>
-<li><p>Vue.js添加了一些拓展的属性或方法来观察对象: <code>__ob__</code>, <code>$add</code>以及<code>$delete</code>. 这些属性是内部的所以它们不会显示在<code>for ... in ...</code>循环中. 但是如果你覆盖了它们这可能就破坏掉了。</p>
+<li><p>Vue.js添加了一些拓展的属性或方法来观察对象: <code>__ob__</code>, <code>$add</code>, <code>$set</code>以及<code>$delete</code>. 这些属性是内部的所以它们不会显示在<code>for ... in ...</code>循环中. 但是如果你覆盖了它们这可能就破坏掉了。</p>
 </li>
 </ol>
 <p>类似的东西还有一些。基于对象访问属性和以前一样,<code>JSON.stringify</code>和<code>for ... in ...</code>循环照常运行。99.9%的情况下你甚至不需要考虑它们。</p>
 </li>
 <li><p><strong>Vue.js目前的状态怎样? 我能把它应用在生产环节么?</strong></p>
-<p>Vue.js 0.11的更新已经经历了一些重大的修改，我们正在朝着1.0的发布版本迈进。Vue.js已经被像Optimizely这样的公司应用在生产环境中。</p>
+<p>Vue.js 最新的0.12发布版本，经历了一些API变更，但这是1.0版本前的最后一个计划发布版本。在此期间，已经<a href="https://github.com/yyx990803/vue/wiki/Projects-Using-Vue.js" target="_blank" rel="external">在产品中使用Vue.js的公司/产品</a>。</p>
 </li>
 <li><p><strong>Vue.js是免费试用的吗?</strong></p>
 <p>Vue.js遵循MIT协议是免费且完全开源的.</p>
@@ -174,11 +174,11 @@
 <li><p><strong>Vue.js和AngularJS之间的区别是什么?</strong></p>
 <p>下面是一些使用Vue而不是Angular的原因，但它们不适用于每一个人：</p>
 <ol>
-<li><p>Vue.js是一个更加灵活开放的解决方案。它允许你以希望的方式组织你的应用程序，而不是像Angular那样强迫去做。它仅仅是一个接口层，所以你可以将它作为一个页面的轻特性而不是一个全栈的SPA。在结合和匹配其他库方面它给了你更大的的空间。这可能是最为重要的区别。</p>
+<li><p>Vue.js是一个更加灵活开放的解决方案。它允许你以希望的方式组织你的应用程序，而不是像Angular那样强迫去做。它仅仅是一个接口层，所以你可以将它作为一个页面的轻特性而不是一个全栈的SPA。在结合和匹配其他库方面它给了你更大的的空间，但你也应为更多的架构决策负责。例如，Vue.js核心默认不包含路由和ajax功能，并且通常假定你在用应用中使用了一个外部的模块管理器。这可能是最重要的区别。</p>
 </li>
-<li><p>总体来说Vue.js比Angular简单, 因此你可以快速地学习它的方方面面并投入生产.</p>
+<li><p>在API和设计方面，Vue.js比Angular简单得多, 因此你可以快速地学习它的方方面面并投入生产.</p>
 </li>
-<li><p>Vue.js拥有更好的性能，因为它不使用脏检查。当观察点越来越多时Angular会变得越来越慢，因为作用域内的每一次变更所有的这些观察点都需要被重新评估。Vue.js不面临这些问题，这是因为它采用了基于事件的观察机制，所以所有的触发都是独立的，除非它们之间有明确的依赖关系。</p>
+<li><p>Vue.js拥有更好的性能，因为它不使用脏检查。当观察点越来越多时Angular会变得越来越慢，因为作用域内的每一次变更所有的这些观察点都需要被重新评估。Vue.js不面临这些问题，这是因为它采用了一个透明的依赖追踪的观察系统，所以所有的触发都是独立的，除非它们之间有明确的依赖关系。</p>
 </li>
 <li><p>Vue.js指令和组件间具有一个清晰隔离。指令只意味着封装DOM操作，而组件代表一个子独立的单元——它拥有自己的视图和数据逻辑。在Angular中它们两者间有不少混淆。</p>
 </li>
@@ -195,8 +195,13 @@
 <p>总的来说我自己就是React设计理念的忠实粉丝。但React有一个问题就是你的逻辑和视图是紧密结合在一起的。对于部分开发者来说这是件让人高兴的事，但对那些像我一样设计/开发混合进行的人来说，更希望能有一个模板，它能够更容易地在视觉上考虑设计和CSS。JSX和JavaScript逻辑的混合打破了我映射代码到设计的视觉模型。相反，Vue.js扮演了一个轻量级的DSL(指令型的) 的角色，这样我们有了一个直观的扫描模板，且能够将逻辑封装进指令和过滤器中。</p>
 <p>React的另一个问题是：由于DOM更新完全下放给虚拟DOM，当你真的<strong>想</strong>自己控制DOM是就有点棘手了（虽然理论上你可以，但这样做时你本质上在对抗库原本的原则）。对于需要复杂时间控制的动画应用来说这就变成了一项很讨人厌的限制。在这方面，Vue.js允许更多的灵活性并且有不少用Vue.js构建的事例<a href="https://github.com/yyx990803/vue/wiki/Projects-Using-Vue.js#interactive-experiences" target="_blank" rel="external">一些FWA/Awwwards获奖站点</a></p>
 </li>
+<li><p><strong>What makes Vue.js different from Polymer?</strong></p>
+</li>
+</ul>
+<p>Polymer是另一个google赞助的项目，实际上也给Vue.js提供了灵感。Vue.js的components组件可以类比为Polymer的自定义元素，它们都提供类似的开发特性。最大的不同，是Polymer构建于最新的web组件特性，需要不那么简单的polyfill，以在并不能原生支持的浏览器里运行（导致性能较低）。相对的，Vue.js无需任何依赖，最低兼容到IE9。</p>
+<ul>
 <li><p><strong>我要提供帮助!</strong></p>
-<p>很好! 阅读 <a href="https://github.com/yyx990803/vue/blob/master/CONTRIBUTING.md" target="_blank" rel="external">贡献指导</a> 并加入IRC上的讨论 (#vuejs).</p>
+<p>很好! 阅读 <a href="https://github.com/yyx990803/vue/blob/master/CONTRIBUTING.md" target="_blank" rel="external">贡献指导</a> 并加入<a href="https://gitter.im/yyx990803/vue" target="_blank"><img src="https://badges.gitter.im/Join%20Chat.svg"></a>上进行讨论。</p>
 </li>
 </ul>
 

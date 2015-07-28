@@ -130,7 +130,7 @@
                 </li>
             
                 <li>
-                    <a href="/guide/best-practices.html" class="sidebar-link new">Tips & Best Practices</a>
+                    <a href="/guide/best-practices.html" class="sidebar-link new">提示和最佳实践</a>
                 </li>
             
             <li><a href="http://legacy.vuejs.org">旧版 0.11 文档</a></li>
@@ -199,7 +199,12 @@ var demo = new Vue({
 })
 </script>
 
-<h2 id="直接指令">直接指令</h2><p>如果在创建自定义指令的时候传入 <code>isLiteral: true</code> ，那么属性值就会被看成直接字符串，并被指定为该指令的<code>表达式</code>。指令不会试图建<br>立数据监视。</p>
+<h3 id="多重条款">多重条款</h3><p>逗号分隔的参数被绑定为多重指令的实例。在下面的例子中，指令方法被调用两次：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-demo</span>=<span class="value">"color: 'white', text: 'hello!'"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>利用闭合值的对象标识符，你可以实现单一绑定全部参数：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-demo</span>=<span class="value">"&#123;color: 'white', text: 'hello!'&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'demo'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value) <span class="comment">// Object &#123;color: 'white', text: 'hello!'&#125;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="直接指令">直接指令</h2><p>如果在创建自定义指令的时候传入 <code>isLiteral: true</code> ，那么属性值就会被看成直接字符串，并被指定为该指令的<code>表达式</code>。指令不会试图建立数据监视。</p>
 <p>Example:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-literal-dir</span>=<span class="value">"foo"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'literal-dir'</span>, &#123;</span><br><span class="line">  isLiteral: <span class="literal">true</span>,</span><br><span class="line">  bind: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.expression) <span class="comment">// 'foo'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
@@ -222,7 +227,15 @@ var demo = new Vue({
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-my-directive</span>=<span class="value">"obj"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'my-directive'</span>, &#123;</span><br><span class="line">  deep: <span class="literal">true</span>,</span><br><span class="line">  update: <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// will be called when nested properties in `obj`</span></span><br><span class="line">    <span class="comment">// changes.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h2 id="指令优先级">指令优先级</h2><p>你可以选择给指令提供一个优先级数（默认是0）。同一个元素上优先级越高的指令会比其他的指令处理得早一些。优先级一样的指令会按照其在元素属性列表中出现的顺序依次处理，但是不能保证这个顺序在不同的浏览器中是一致的。</p>
-<p>你可以去<a href="../api/directives.html">API reference</a>看一些内置指令的优先级。另外，<code>v-repeat</code>, <code>v-if</code> 以及 <code>v-component</code> 被视为“终端指令”，它们在编译过程中始终拥有最高的优先级。</p>
+<p>你可以去<a href="../api/directives.html">API reference</a>看一些内置指令的优先级。另外，逻辑控制指令<code>v-repeat</code>, <code>v-if</code>被视为“终端指令”，它们在编译过程中始终拥有最高的优先级。</p>
+<h2 id="元素指令">元素指令</h2><p>有时候，我们可能想要我们的指令被用于自定义元素的form中，而不是作为一个属性。这与Angular的<code>E</code>类指令的概念非常相似。元素指令向一个成熟的组件（本向导随后将解释它），提供一个轻量化的选择。你可以注册一个自定义的元素指令，像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vue.elementDirective(<span class="string">'my-directive'</span>, &#123;</span><br><span class="line">  <span class="comment">// same API as normal directives</span></span><br><span class="line">  bind: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// manipulate this.el...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>然后, 替代:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-my-directive</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们可以写成:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">my-directive</span>&gt;</span><span class="tag">&lt;/<span class="title">my-directive</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>元素指令不能接受参数或表达式，但是它可以读取元素的属性，来决定它的行为。</p>
+<p>与通常的指令有个很大的不同，元素指令是<strong>终端</strong>式的，这意味着，一旦Vue遇到一个元素指令，它将导致元素及它的子元素独立 - 只有元素指令可以操作该元素及其子元素。</p>
 <p>下面，我们来看怎样写一个<a href="../guide/custom-filter.html">自定义过滤器</a>。</p>
 
     <div class="footer">发现了问题或想要贡献？来 Github 给 Vue.js <a href="https://github.com/vuejs/vuejs.org" target="_blank">英文站点</a>或<a href="https://github.com/Jinjiang/vuejs.org/tree/lang-zh" target="_blank">中文翻译</a>来个 Fork 吧！</div>

@@ -74,7 +74,7 @@
                 </li>
             
                 <li>
-                    <a href="/api/options.html" class="sidebar-link">选项</a>
+                    <a href="/api/options.html" class="sidebar-link">组件选项</a>
                 </li>
             
                 <li>
@@ -114,21 +114,24 @@
         <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
     </div>
     <h2 id="Data">Data</h2><blockquote>
-<p>你可以在Vue运行实例中监视数据的变化。你会注意到所有的watch回调都是异步发生的。而且，结果是在事件循环中被分批处理的。这就意味着一个结果假设在一次事件循环中改变多次，回调只会发生一次并直接变到最后的结果。</p>
+<p>你可以在 Vue 运行实例中监视数据的变化。你会注意到所有的 watch 回调都是异步发生的。而且，结果是在事件循环中被分批处理的。这就意味着一个结果假设在一次事件循环中改变多次，回调只会发生一次并直接变到最后的结果。</p>
 </blockquote>
-<h3 id="vm-$watch(_expression,_callback,_[deep,_immediate]_)">vm.$watch( expression, callback, [deep, immediate] )</h3><ul>
-<li><strong>expression</strong> <code>String</code></li>
+<h3 id="vm-$watch(_expOrFn,_callback,_[options]_)">vm.$watch( expOrFn, callback, [options] )</h3><ul>
+<li><strong>expOrFn</strong> <code>String|Function</code></li>
 <li><strong>callback( newValue, oldValue )</strong> <code>Function</code></li>
-<li><strong>deep</strong> <code>Boolean</code> <em>optional</em></li>
-<li><strong>immdediate</strong> <code>Boolean</code> <em>optional</em></li>
+<li><strong>options</strong> <code>Object</code> <em>optional</em><ul>
+<li><strong>deep</strong> <code>Boolean</code></li>
+<li><strong>immediate</strong> <code>Boolean</code></li>
+<li><strong>sync</strong> <code>Boolean</code></li>
 </ul>
-<p>监听在Vue实例中改变的一个表达式。表达式可以是一个单独的路径或者是一个实际的表达式：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vm.$watch(<span class="string">'a + b'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>也可以监视在对象中的属性，你需要为 <code>deep</code> 传递一个 <code>true</code> 来使用此功能 。</p>
-<p>请注意你不可以这么监视用来数组中元素的变化。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vm.$watch(<span class="string">'someObject'</span>, callback, <span class="literal">true</span>)</span><br><span class="line">vm.someObject.nestedValue = <span class="number">123</span></span><br><span class="line"><span class="comment">// 回调被触发</span></span><br></pre></td></tr></table></figure>
-<p>如果传递一个 <code>true</code> 到第四个变量 <code>immediate</code> , 那么回调会带着现在表达式的结果被立即触发。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vm.$watch(<span class="string">'a'</span>, callback, <span class="literal">false</span>, <span class="literal">true</span>)</span><br><span class="line"><span class="comment">// 回调使用现在表达式的结果 `a` 被立刻触发</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>监听在 Vue 实例中改变的一个表达式或一个可推导的函数。表达式可以是一个单独的路径或者是一个实际的表达式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vm.$watch(<span class="string">'a + b'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">vm.$watch(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="keyword">this</span>.b</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>也可以监视在对象中的属性，你需要在 <code>options</code> 参数里传递 <code>deep: true</code> 来使用此功能。值得注意的是你不需要这样监听数组的突变变化 (mutations)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vm.$watch(<span class="string">'someObject'</span>, callback, &#123;</span><br><span class="line">  deep: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line">vm.someObject.nestedValue = <span class="number">123</span></span><br><span class="line"><span class="comment">// 回调被触发</span></span><br></pre></td></tr></table></figure>
+<p>如果在 <code>options</code> 参数里传递一个 <code>immediate: true</code>，那么回调会带着现在表达式的结果被立即触发。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vm.$watch(<span class="string">'a'</span>, callback, &#123;</span><br><span class="line">  immediate: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 回调使用现在表达式的结果 `a` 被立刻触发</span></span><br></pre></td></tr></table></figure>
 <p>最后，还需要使用 <code>vm.$watch</code> 来返回一个停止监视的函数用来停止继续触发回调。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> unwatch = vm.$watch(<span class="string">'a'</span>, cb)</span><br><span class="line"><span class="comment">// 最后，停止监制</span></span><br><span class="line">unwatch()</span><br></pre></td></tr></table></figure>
 <h3 id="vm-$get(_expression_)">vm.$get( expression )</h3><ul>
@@ -158,7 +161,7 @@
 <li><strong>templateString</strong> <code>String</code></li>
 </ul>
 <p>计算一段包含mustache数据的模板字符串。注意：此方法仅仅运行字符串数据；属性指令不会被编译。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// assuming vm.msg = 'hello'</span></span><br><span class="line">vm.$interpolate(<span class="string">'&#123;&amp;#123;msg&amp;#125;&#125; world!'</span>) <span class="comment">// -&gt; 'hello world!'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// assuming vm.msg = 'hello'</span></span><br><span class="line">vm.$interpolate(<span class="string">'&#123;&#123;msg&#125;&#125; world!'</span>) <span class="comment">// -&gt; 'hello world!'</span></span><br></pre></td></tr></table></figure>
 <h3 id="vm-$log(_[keypath]_)">vm.$log( [keypath] )</h3><ul>
 <li><strong>keypath</strong> <code>String</code> <em>optional</em></li>
 </ul>
@@ -219,6 +222,10 @@
 <li><strong>callback</strong> <code>Function</code> <em>optional</em></li>
 </ul>
 <p>从 DOM 中移除 vm 的 <code>$el</code> 。</p>
+<h3 id="vm-$nextTick(_callback_)">vm.$nextTick( callback )</h3><ul>
+<li><strong>callback</strong> <code>Function</code></li>
+</ul>
+<p>延迟回调的执行至下一次 DOM 更新循环到来。当你改变一些数据之后立刻使用它来等待 DOM 更新。这和全局的 <code>Vue.nextTick</code> 是相同的，只是回调的 <code>this</code> 上下文自动绑定到了调用这个回调的实例上。</p>
 <h2 id="Lifecycle">Lifecycle</h2><h3 id="vm-$mount(_[element|selector]_)">vm.$mount( [element|selector] )</h3><ul>
 <li><strong>element</strong> <code>HTMLElement</code> | <strong>selector</strong> <code>String</code> <em>optional</em></li>
 </ul>

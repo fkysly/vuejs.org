@@ -74,7 +74,7 @@
                 </li>
             
                 <li>
-                    <a href="/api/options.html" class="sidebar-link">选项</a>
+                    <a href="/api/options.html" class="sidebar-link">组件选项</a>
                 </li>
             
                 <li>
@@ -114,13 +114,15 @@
         <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
     </div>
     <h3 id="Vue-config">Vue.config</h3><p><code>Vue.config</code> 是包含 Vue 全局设置的对象。下面列出了所有可设置变量及其默认值：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 打印 warnings 的堆栈跟踪？</span></span><br><span class="line">  debug: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 指令的属性前缀</span></span><br><span class="line">  prefix: <span class="string">'v-'</span>,</span><br><span class="line">  <span class="comment">// 插入分隔符</span></span><br><span class="line">  <span class="comment">// 对于插入HTML，添加一个额外的最外层字符</span></span><br><span class="line">  delimiters: [<span class="string">'&#123;&amp;#123;'</span>, <span class="string">'&amp;#125;&#125;'</span>],</span><br><span class="line">  <span class="comment">// 抑制 warnings？</span></span><br><span class="line">  silent: <span class="literal">false</span>,</span><br><span class="line">  <span class="comment">// 插入 mustache 绑定?</span></span><br><span class="line">  interpolate: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// (对 directives 和 watchers)使用异步更新？</span></span><br><span class="line">  <span class="keyword">async</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 允许改变所观察的Array的原型链？</span></span><br><span class="line">  proto: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 打印 warnings 的堆栈跟踪？</span></span><br><span class="line">  debug: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 启用strict模式，详情见下文</span></span><br><span class="line">  strict: <span class="literal">false</span>,</span><br><span class="line">  <span class="comment">// 指令的属性前缀</span></span><br><span class="line">  prefix: <span class="string">'v-'</span>,</span><br><span class="line">  <span class="comment">// 插入分隔符</span></span><br><span class="line">  <span class="comment">// 对于插入HTML，添加一个额外的最外层字符</span></span><br><span class="line">  delimiters: [<span class="string">'&#123;&amp;#123;'</span>, <span class="string">'&amp;#125;&#125;'</span>],</span><br><span class="line">  <span class="comment">// 抑制 warnings？</span></span><br><span class="line">  silent: <span class="literal">false</span>,</span><br><span class="line">  <span class="comment">// 插入 mustache 绑定?</span></span><br><span class="line">  interpolate: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// (对 directives 和 watchers)使用异步更新？</span></span><br><span class="line">  <span class="keyword">async</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 允许改变所观察的Array的原型链？</span></span><br><span class="line">  proto: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>你可以直接对其修改，例如：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.debug = <span class="literal">true</span> <span class="comment">// 开启调试模式</span></span><br></pre></td></tr></table></figure>
 <p><strong>调试模式</strong></p>
 <p>当 <code>Vue.config.debug</code> 设置为 true 时，Vue 会自动启动同步模式，并在有警告时抛出一个 <code>debugger</code> 语句。这使得用户能够在浏览器开发工具中检查完整的堆栈跟踪(full stack trace)</p>
 <p class="tip">调试模式在压缩的生产环境(minified production builds)下是不可用的</p>
 
+<p><strong>Strict模式</strong></p>
+<p></p><p class="tip">0.12.8新增</p><br>默认情况下，Vue组件继承了整个类继承链的所有资源（通过<code>Vue.extend</code>）和父视图。在严格模式下，组件只能继承从类继承的资源，不能从父视图层次继承。当启用了严格的模式时，资源应该是全局性的，或者是依赖于需要它们的组件。使用严格模式，能更好的封装组件和增加大型的项目的可重用性。<p></p>
 <p><strong>改变分隔符(Delimiters)</strong></p>
 <p>当分隔符(delimiters)是设置为插入文本时，那么设置为插入HTML的分隔符可以通过在两边的最外层加上符号来生成。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.delimiters = [<span class="string">'(%'</span>, <span class="string">'%)'</span>]</span><br><span class="line"><span class="comment">// (% %)是文本的标签</span></span><br><span class="line"><span class="comment">// 则((% %))是HTML的标签</span></span><br></pre></td></tr></table></figure>
@@ -138,6 +140,11 @@
 <li><strong>definition</strong> <code>Function</code> or <code>Object</code> <em>可选的</em></li>
 </ul>
 <p>注册或取得一个全局自定义的指令。详情见<a href="../guide/custom-directive.html">编写自定义指令</a>。</p>
+<h3 id="Vue-elementDirective(_id,_[definition]_)">Vue.elementDirective( id, [definition] )</h3><ul>
+<li><strong>id</strong> <code>String</code></li>
+<li><strong>definition</strong> <code>Function</code> or <code>Object</code> <em>可选的</em></li>
+</ul>
+<p>注册或取得一个全局自定义的元素指令。详情见<a href="../guide/custom-directive.html">元素指令</a>。</p>
 <h3 id="Vue-filter(_id,_[definition]_)">Vue.filter( id, [definition] )</h3><ul>
 <li><strong>id</strong> <code>String</code></li>
 <li><strong>definition</strong> <code>Function</code> <em>可选的</em></li>

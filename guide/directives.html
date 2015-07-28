@@ -130,7 +130,7 @@
                 </li>
             
                 <li>
-                    <a href="/guide/best-practices.html" class="sidebar-link new">Tips & Best Practices</a>
+                    <a href="/guide/best-practices.html" class="sidebar-link new">提示和最佳实践</a>
                 </li>
             
             <li><a href="http://legacy.vuejs.org">旧版 0.11 文档</a></li>
@@ -149,13 +149,13 @@
     <div id="ad">
         <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuejs" id="_carbonads_js"></script>
     </div>
-    <h2 id="摘要">摘要</h2><p>如果你还没有使用过 AngularJS，你可能不太清楚指令 (directive) 是什么。一个指令的本质是一个特殊的标记符号，使得该库对一个 DOM 元素进行一些处理。在 Vue.js 中，指令的概念和 Angular 是完全一样的。Vue.js 中的指令就是带有特殊前缀的 HTML 特性，它会以下面的格式出现：</p>
+    <h2 id="摘要">摘要</h2><p>如果你还没有使用过 AngularJS，你可能不太清楚指令 (directive) 是什么。一个指令的本质是一个特殊的标记符号，使得该库对一个 DOM 元素进行一些处理。在 Vue.js 中，指令的概念比起在Angular中，进行了大大简化。Vue.js 中的指令只会出现在以前缀 HTML 属性的格式出现：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">element</span></span><br><span class="line">  <span class="attribute">prefix-directiveId</span>=<span class="value">"[argument:] expression [| filters...]"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">element</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="一个简单的例子">一个简单的例子</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"message"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这里默认的前缀是 <code>v</code>。指令 ID 是 <code>text</code>，表达式是 <code>message</code>。该指令会在该 Vue 实例的 <code>message</code> 属性发生变化时更新这个 div 的 <code>textContent</code>。</p>
+<p>这里默认的前缀是 <code>v</code>。指令 ID 是 <code>text</code>，表达式是 <code>message</code>。此指令指示Vue.js当 Vue 实例的属性改变时更新此 div 的 <code>textContent</code>。</p>
 <h2 id="内联表达式">内联表达式</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-text</span>=<span class="value">"'hello ' + user.firstName + ' ' + user.lastName"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这里我们用一个可推导的表达式 (computed expression) 提到了简单的属性名。Vue.js 会自动跟踪表达式中依赖的属性并在这些依赖发生变化的时候更新指令。而且因为有异步批处理更新机制，哪怕多个依赖同时变化时，表达式也只会在时间循环里触发一次。</p>
-<p>你应该灵活的使用表达式，以避免在你的模板里放入过多的逻辑，尤其是有边界效应的语句 (事件监听表达式除外)。为了在模板内防止逻辑被滥用，Vue.js 把内联表达式限制为<strong>只能是一条语句</strong>。如果需要绑定更复杂的操作，请使用<a href="../guide/computed.html">可推导的属性</a>。</p>
+<p>这里我们用一个可推导的表达式 (computed expression) 替代简单的属性名。Vue.js 会自动跟踪表达式中依赖的属性并在这些依赖发生变化的时候更新指令。而且因为有异步批处理更新机制，哪怕多个依赖同时变化时，表达式也只会在时间循环里触发一次。</p>
+<p>你应该灵活的使用表达式，并避免在你的模板里放入过多的逻辑，尤其是有边界效应的语句 (事件监听表达式除外)。为了在模板内防止逻辑被滥用，Vue.js 把内联表达式限制为<strong>只能是一条语句</strong>。如果需要绑定更复杂的操作，请使用<a href="../guide/computed.html">可推导的属性</a>。</p>
 <p class="tip">由于安全方面的原因，在内联表达式中你只能访问当前上下文中 Vue 实例及其祖先的属性和方法。</p>
 
 <h2 id="参数">参数</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-on</span>=<span class="value">"click : clickHandler"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -163,13 +163,12 @@
 <h2 id="过滤器">过滤器</h2><p>过滤器可以紧跟在指令的路径或表达式之后，在更新 DOM 之前对值进行进一步处理。过滤器会被像 shell 脚本一样表示在一个竖线 (<code>|</code>) 之后。更多内容请移步至<a href="../guide/filters.html">深入了解过滤器</a>。</p>
 <h2 id="多重语句指令">多重语句指令</h2><p>你可以在同一个特性的同一个指令里创建多个绑定。这些绑定是用逗号分隔开的。它们在底层被分解为多个指令实例进行绑定。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-on</span>=<span class="value">"</span><br><span class="line">  click   : onClick,</span><br><span class="line">  keyup   : onKeyup,</span><br><span class="line">  keydown : onKeydown</span><br><span class="line">"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="字面量指令">字面量指令</h2><p>有些指令不会创建数据绑定——它们的值只是一个字符串字面量。比如 <code>v-component</code> 指令：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-component</span>=<span class="value">"my-component"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这里的 <code>&quot;my-component&quot;</code> 并不是一个数据属性——它是一个字符串 ID，用来让 Vue.js 查找对应的组件构造函数。</p>
-<p>你也可以在字面量指令中使用 mustache 表达式。比如，下面的代码允许你动态的解析你想要的组件类型：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-component</span>=<span class="value">"&#123;&amp;#123; isOwner ? 'owner-panel' : 'guest-panel' &amp;#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>当花括号内部的表达式改变时，渲染出来的组件也会随之改变哦！</p>
-<p>尽管如此，值得注意的是只有 <code>v-component</code> 和 <code>v-partial</code> 这两个字面量指令有这种可响应的行为。Mustache 表达式在别的字面量指令，如 <code>v-ref</code> 中，是<strong>只运行一次</strong>的。在指令被编译之后，就不再响应值的变化了。</p>
+<h2 id="字面量指令">字面量指令</h2><p>有些指令不会创建数据绑定——它们的值只是一个字符串字面量。比如 <code>v-ref</code> 指令：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">my-component</span> <span class="attribute">v-ref</span>=<span class="value">"some-string-id"</span>&gt;</span><span class="tag">&lt;/<span class="title">my-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里的 <code>&quot;some-string-id&quot;</code> 并不是一个反射表达式 — Vue.js不会尝试看它在组件中的数据</p>
+<p>在一些情况下，你也可以使用mustache语法来使用反射表达式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-show</span>=<span class="value">"showMsg"</span> <span class="attribute">v-transition</span>=<span class="value">"&#123;&#123;dynamicTransitionId&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>但是，请注意只有<code>v-transition</code>指令拥有此功能。Mustache表达式在其他指令中，例如<code>v-ref</code>和<code>v-el</code>，只会被计算<strong>一次</strong>。指令编译完成后，他将不会再根据属性值的变化而变化。</p>
 <p>完整的字面量指令列表可以在 <a href="../api/directives.html#字面指令">API 索引</a> 中找到。</p>
 <h2 id="空指令">空指令</h2><p>有些指令并不需要判断特性的值——这些操作对某个元素处理且仅处理一次。比如 <code>v-pre</code> 指令：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">v-pre</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- markup in here will not be compiled --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
